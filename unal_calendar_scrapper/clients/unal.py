@@ -74,3 +74,6 @@ class UnalClient:
             calendars.append(new_calendar)
 
         return calendars
+
+    def close(self) -> None:
+        self.driver.close()

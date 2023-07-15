@@ -5,5 +5,6 @@ def main():
     unal_client = UnalClient()
     calendars = unal_client.scrap_calendars()
     print("Found {} calendars".format(len(calendars)))
+    unal_client.close()
     
 main()
