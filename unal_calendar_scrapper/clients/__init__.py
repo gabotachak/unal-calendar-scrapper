@@ -1,3 +1,3 @@
-from unal_calendar_scrapper.clients.Unal_a import UnalClient
+from unal_calendar_scrapper.clients.Unal import UnalClient
 
 __all__ = ["UnalClient"]
