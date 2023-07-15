@@ -69,7 +69,9 @@ class UnalClient:
                 for row in rows:
                     elements = row.find_elements("xpath", ".//td")
                     date, activity, responsable = [element.text for element in elements]
-                    new_calendar.add_event(UnalEvent(activity, responsable, str_date=date))
+                    new_calendar.add_event(
+                        UnalEvent(activity, responsable, str_date=date)
+                    )
 
             calendars.append(new_calendar)
 
