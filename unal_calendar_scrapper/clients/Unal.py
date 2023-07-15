@@ -2,6 +2,7 @@ from typing import List
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.firefox.options import Options
 
 from unal_calendar_scrapper.entities import UnalCalendar
 from unal_calendar_scrapper.entities import UnalEvent
@@ -11,7 +12,9 @@ class UnalClient:
     url: str = "https://bogota.unal.edu.co/calendario-academico/"
 
     def __init__(self) -> None:
-        self.driver = webdriver.Firefox()
+        firefox_options = Options()
+        firefox_options.add_argument("--headless")
+        self.driver = webdriver.Firefox(options=firefox_options)
 
     def scrap_calendars(self) -> List[UnalCalendar]:
         self.driver.get(self.url)
