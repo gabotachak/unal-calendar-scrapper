@@ -7,17 +7,17 @@ from selenium.webdriver.firefox.options import Options
 from unal_calendar_scrapper.entities import UnalCalendar
 from unal_calendar_scrapper.entities import UnalEvent
 
+UNAL_URL = "https://bogota.unal.edu.co/calendario-academico/"
 
 class UnalClient:
-    url: str = "https://bogota.unal.edu.co/calendario-academico/"
-
     def __init__(self) -> None:
         firefox_options = Options()
         firefox_options.add_argument("--headless")
         self.driver = webdriver.Firefox(options=firefox_options)
 
     def scrap_calendars(self) -> List[UnalCalendar]:
-        self.driver.get(self.url)
+        print("Initializing scrapping...")
+        self.driver.get(UNAL_URL)
         calendars: List[UnalCalendar] = []
 
         sections = self.driver.find_elements("xpath", "//div[@class='csc-default']")
@@ -71,13 +71,14 @@ class UnalClient:
                 )
                 for row in rows:
                     elements = row.find_elements("xpath", ".//td")
-                    date, activity, responsable = [element.text for element in elements]
+                    date, activity, description = [element.text for element in elements]
                     new_calendar.add_event(
-                        UnalEvent(activity, responsable, str_date=date)
+                        UnalEvent(activity, description, str_date=date)
                     )
 
             calendars.append(new_calendar)
 
+        print("Ended scrapping.")
         return calendars
 
     def close(self) -> None:
