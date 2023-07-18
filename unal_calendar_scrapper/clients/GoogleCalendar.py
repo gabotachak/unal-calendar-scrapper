@@ -73,7 +73,7 @@ class GoogleCalendarClient:
 
         return events
 
-    def create_event(self, calendar_id: str, event: UnalEvent) -> list:
+    def create_event(self, calendar_id: str, event: UnalEvent) -> dict:
         body = {
             "summary": event.activity,
             "location": UNAL_LOCATION,
