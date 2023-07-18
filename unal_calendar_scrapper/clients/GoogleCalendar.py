@@ -1,4 +1,3 @@
-from datetime import date
 import os.path
 
 from google.auth.transport.requests import Request
@@ -39,6 +38,7 @@ class GoogleCalendarClient:
                     CREDENTIAL_PATH, SCOPES
                 )
                 creds = flow.run_local_server(port=0)
+                # TODO: Use selenium to login from the browser
 
         with open(TOKEN_PATH, "w") as token:
             token.write(creds.to_json())
